@@ -10,7 +10,7 @@ const dbConnection = async() => {
             //useFindAndModify: false
         });
 
-        console.log('Base de datos online');
+        console.log('Database online');
         
     } catch (error) {
         console.log(error);

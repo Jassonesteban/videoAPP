@@ -8,6 +8,9 @@ class Server {
         this.app = express();
         this.port = process.env.PORT;
         this.usersPath = '/api/users';
+        this.canalPath = '/api/canal';
+        this.videoPath = '/api/video';
+
 
         //conexion a la base de datos
         this.conectionDB();
@@ -35,11 +38,13 @@ class Server {
 
     routes() {
         this.app.use(this.usersPath, require('../routes/user'));
+        this.app.use(this.canalPath, require('../routes/canal'));
+        this.app.use(this.videoPath, require('../routes/video'));
     }
 
     listen() {
         this.app.listen(this.port, () => {
-            console.log('Servidor en el puerto', this.port);
+            console.log('Server in port', this.port);
         });
     }
 
