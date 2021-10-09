@@ -19,8 +19,8 @@ const AllVideos = async (req = request, res = response) => {
 
 //Post Video
 const PostVideo = async (req = request, res = response) => {
-    const { Nombre, FechaPublicacion, Description, URL } = req.body;
-    const video = new Video({ Nombre, FechaPublicacion, Description, URL });
+    const { Nombre, FechaPublicacion, Description, Canal, url } = req.body;
+    const video = new Video({ Nombre, FechaPublicacion, Description, Canal, url });
     await video.save();
 
     res.status(201).json({

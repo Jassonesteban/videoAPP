@@ -7,7 +7,7 @@ const AllCanals = async (req = request, res = response) => {
 
     const [total, canals] = await Promise.all([
             Canal.countDocuments(query),
-            Canal.find(query)
+            Canal.find(query).populate('Owner', 'Nombre')
     ]);
 
     res.json({
@@ -50,7 +50,7 @@ const GetAllCanals = async (req = request, res = response) => {
 
     const [total, canals] = await Promise.all([
         Canal.countDocuments(query),
-        Canal.find(query).skip(Number(desde)).limit(Number(Limite))
+        Canal.find(query).skip(Number(desde)).limit(Number(Limite)).populate('Owner', 'Nombre')
     ]);
 
     res.status(200).json({

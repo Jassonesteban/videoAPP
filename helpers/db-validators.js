@@ -34,9 +34,21 @@ const ExisteVideoById = async(id) => {
     }
 }
 
+const coleccionPermitida = async(coleccion = '', colecciones = []) => {
+
+    const incluida = colecciones.includes(coleccion);
+
+    if(!incluida){
+        throw new Error(`La coleccion ${coleccion} no es permitida`);
+    }
+    
+    return true;
+}
+
 module.exports = {
     EmailExiste,
     ExisteUserById,
     ExisteCanalById,
-    ExisteVideoById
+    ExisteVideoById,
+    coleccionPermitida
 }

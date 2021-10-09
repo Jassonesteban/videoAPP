@@ -29,12 +29,12 @@ const VideoSchema = Schema({
         ref: 'Canal',
         required: true
     },
-    URL: {
-        type: String
-    },
     isAvailable: {
         type: Boolean,
         default: true
+    },
+    url: {
+        type: String
     }
 
 });
