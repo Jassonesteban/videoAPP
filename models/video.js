@@ -1,4 +1,6 @@
 const {Schema, model} = require('mongoose');
+const date = require('date-and-time');
+const now = new Date();
 
 const VideoSchema = Schema({
     Nombre: {
@@ -7,7 +9,7 @@ const VideoSchema = Schema({
     },
     FechaPublicacion: {
         type: String,
-        required: [true, 'La fecha es requerida']
+        default: date.format(now, 'dddd, MMM DD YYYY')
     },
     ContLikes: {
         type: Number,

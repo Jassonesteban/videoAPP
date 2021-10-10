@@ -13,7 +13,6 @@ router.get('/', AllVideos);
 router.post('/', [
     check('Nombre', 'El nombre es requerido').not().isEmpty(),
     check('Description', 'Describe tu canal').not().isEmpty(),
-    check('FechaPublicacion', 'La fecha es requerida').not().isEmpty(),
     validarCampos
 ], PostVideo);
 

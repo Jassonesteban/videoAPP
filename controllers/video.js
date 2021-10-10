@@ -7,11 +7,11 @@ const AllVideos = async (req = request, res = response) => {
 
     const [total, videos] = await Promise.all([
         Video.countDocuments(query),
-        Video.find(query)
+        Video.find(query).populate('Canal', 'Nombre')
     ]);
 
     res.json({
-        msg: 'Successfull get canals',
+        msg: 'Successfull get videos',
         total,
         videos
     });
@@ -19,8 +19,8 @@ const AllVideos = async (req = request, res = response) => {
 
 //Post Video
 const PostVideo = async (req = request, res = response) => {
-    const { Nombre, FechaPublicacion, Description, Canal, url } = req.body;
-    const video = new Video({ Nombre, FechaPublicacion, Description, Canal, url });
+    const { Nombre, Description, Canal, url } = req.body;
+    const video = new Video({ Nombre, Description, Canal, url });
     await video.save();
 
     res.status(201).json({
