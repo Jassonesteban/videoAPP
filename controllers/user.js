@@ -89,11 +89,24 @@ const UsersPost = async (req = request, res = response) => {
     });
 }
 
+const getUserById = async(req = request, res = response) => {
+    const { id } = req.params;
+    const [user] = await Promise.all([
+        User.findById(id)
+    ]);
+
+    res.status(200).json({
+        msg: "User found",
+        user
+    });
+}
+
 
 module.exports = {
     UsersGet,
     UsersPost,
     UsersPut,
     UsersDelete,
-    UsersGetPagination
+    UsersGetPagination,
+    getUserById
 }

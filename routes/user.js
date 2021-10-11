@@ -1,12 +1,18 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { UsersGet, UsersPost, UsersPut, UsersDelete, UsersGetPagination } = require('../controllers/user');
+const { UsersGet, UsersPost, UsersPut, UsersDelete, UsersGetPagination, getUserById } = require('../controllers/user');
 const { EmailExiste, ExisteUserById } = require('../helpers/db-validators');
 const { validarCampos } = require('../middlewares/validar-campos');
 
 const router = Router();
 
 router.get('/', UsersGetPagination);
+
+router.get('/:id', [
+    check('id', 'No es un id valido').isMongoId(),
+    check('id').custom(ExisteUserById),
+    validarCampos
+], getUserById)
 
 router.post('/', [
     check('Correo', 'El correo no es valido, verifique!').isEmail(),
