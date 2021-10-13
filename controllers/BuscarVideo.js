@@ -1,9 +1,11 @@
 const { response } = require("express");
 const { ObjectId } = require('mongoose').Types;
 const Video = require('../models/video');
+const Canal = require('../models/canal');
 
 const coleccionesPermitidas = [
-    'video'
+    'video',
+    'canal'
 ];
 
 const BuscarVideo = async (termino = '', res = response) => {
@@ -26,6 +28,25 @@ const BuscarVideo = async (termino = '', res = response) => {
     });
 }
 
+const BuscarCanalbyId = async(termino = '', res = response) => {
+    const esMongoId = ObjectId.isValid(termino);
+
+    if (esMongoId) {
+        const CanalUser = await Canal.findById(termino);
+        return res.json({
+            results: (CanalUser) ? [CanalUser] : [] //ternario
+        });
+    }
+
+    const regex = new RegExp(termino, 'i');
+
+    const canales = await Canal.find({ Owner,_id: regex });
+
+    res.json({
+        results: canales
+    });
+}
+
 const buscar = (req, res = response) => {
 
     const { coleccion, termino } = req.params;
@@ -39,6 +60,9 @@ const buscar = (req, res = response) => {
     switch (coleccion) {
         case 'video':
             BuscarVideo(termino, res);
+            break;
+        case 'canal':
+            BuscarCanalbyId(termino, res);
             break;
         default:
             res.status(500).json({
