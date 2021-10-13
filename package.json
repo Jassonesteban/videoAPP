@@ -18,6 +18,7 @@
     "express": "^4.17.1",
     "express-fileupload": "^1.2.1",
     "express-validator": "^6.12.2",
+    "jasmine-node": "^3.0.0",
     "mongoose": "^6.0.9",
     "nodemon": "^2.0.13",
     "uuid": "^8.3.2"

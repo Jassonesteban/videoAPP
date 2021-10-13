@@ -8,9 +8,11 @@ class Server {
     constructor() {
         this.app = express();
         this.port = process.env.PORT;
+        this.loginUser = '/api/login';
         this.usersPath = '/api/users';
         this.canalPath = '/api/canal';
         this.videoPath = '/api/video';
+        this.buscar = '/api/buscar';
         this.UploadVideo = '/api/uploads';
 
 
@@ -47,8 +49,10 @@ class Server {
 
     routes() {
         this.app.use(this.usersPath, require('../routes/user'));
+        this.app.use(this.loginUser, require('../routes/login'));
         this.app.use(this.canalPath, require('../routes/canal'));
         this.app.use(this.videoPath, require('../routes/video'));
+        this.app.use(this.buscar, require('../routes/BuscarVideo'));
         this.app.use(this.UploadVideo, require('../routes/uploads'));
     }
 
